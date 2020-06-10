@@ -18,10 +18,10 @@ Plate<Banana> 中‘Banana’称为实际类型参数
 #### 泛型的三种使用
 1、泛型接口 (在接口名后面增加 <T>)
 例：
-    ```
+```
     public interface Plate<T>{
     }
-    ```
+```
 2、泛型类( 在类名后面 增加 <T>)
 例-1：未知 泛型类的具体类型
 ```
@@ -83,27 +83,28 @@ static D3<T extends A & A1 & B& C>{//失败
    2.3、如果有多个限定(T extends XClass1&XClass2),则使用第一个边界XClass1作为原始类
 3、有必要时插入类型转换以保持类型安全
 4、生成桥方法以在扩展时保持多态性
+```
 （例如：
-public class AiPlate<T extends Comparable<T>>  implements Plate<T>{
-    public AIPlate() { /* compiled code */ }
-    public void set(Comparable t) { /* compiled code */ }
+    public class AiPlate<T extends Comparable<T>>  implements Plate<T>{
+        public AIPlate() { /* compiled code */ }
+        public void set(Comparable t) { /* compiled code */ }
 
-    public Comparable get() { /* compiled code */ }
+        public Comparable get() { /* compiled code */ }
 
-    	@Overide
-    	public synthetic bridge get(){
-    	}
+    	    @Overide
+    	    public synthetic bridge get(){}
 
-    	@Overide
-    	public synthetic bridge set(Object t){ //这里就是桥方法，
-    	    set((Comparable)t) //这里调用的就是上面的set(Comparable t)方法；保证了java的多态性
-    	}
+    	    @Overide
+    	    public synthetic bridge set(Object t){ //这里就是桥方法，
+    	        set((Comparable)t) //这里调用的就是上面的set(Comparable t)方法；保证了java的多态性
+    	     }
 
     	 public java.lang.String toString() { /* compiled code */ }
-}
+    }
 
 在“字节码-class” 中会生成 桥方法，来保证java的多态
 ）
+```
 
 #### 使用泛型以及泛型参数带来的影响（副作用）
 1、泛型类型变量不能使用基本数据类型（因为：比如：ArrayList<int>当类型擦除后，Arraylist的原始类中的类型变量（T）替换成Object，但Object类型不能存放int类型）
