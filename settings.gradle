@@ -1,0 +1,3 @@
+rootProject.name='GenericsExample'
+include ':app'
+include ':lib'
